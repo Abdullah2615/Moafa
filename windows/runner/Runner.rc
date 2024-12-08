@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "moafa" "\0"
+            VALUE "FileDescription", "doctor" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "moafa" "\0"
+            VALUE "InternalName", "doctor" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "moafa.exe" "\0"
-            VALUE "ProductName", "moafa" "\0"
+            VALUE "OriginalFilename", "doctor.exe" "\0"
+            VALUE "ProductName", "doctor" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
