@@ -26,7 +26,7 @@ class _SignupState extends State<Signup> {
               children: [
                 Padding(
                   padding: const EdgeInsets.fromLTRB(200, 0, 0, 0),
-                  child: Image.asset('assets/ball.png'),
+                  child: Image.asset('assets/Asset 6@10x.png'),
                 ),
               ],
             ),

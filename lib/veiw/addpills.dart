@@ -58,94 +58,147 @@ class _PillState extends State<Pill> {
           },
           icon: Icon(Icons.arrow_back_ios_new_rounded),
         ),
-        title: Text(
+        title: const Text(
           'Add Pill Schedule',
           style: TextStyle(fontSize: 18),
         ),
       ),
-      body: Column(
-        children: [
-          // Pill Name
-          Text(
-            "Pill Name",
-            style: TextStyle(fontSize: screenWidth * 0.035, color: Colors.grey),
-          ),
-          SizedBox(height: screenHeight * 0.01),
-          TextFormField(
-            decoration: InputDecoration(
-              hintText: "Pill name",
-              fillColor: Colors.grey[200],
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(screenWidth * 0.02),
-              ),
-            ),
-          ),
-          SizedBox(height: screenHeight * 0.02),
-
-          // Shape and Frequency Row
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(screenWidth * 0.04),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Shape
-              Flexible(
-                flex: 1,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Shape",
-                      style: TextStyle(
-                          fontSize: screenWidth * 0.035, color: Colors.grey),
-                    ),
-                    SizedBox(height: screenHeight * 0.01),
-                    DropdownButtonFormField<String>(
-                      value: selectedShape,
-                      items: shapes
-                          .map((shape) => DropdownMenuItem<String>(
-                                value: shape,
-                                child: Text(shape),
-                              ))
-                          .toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedShape = value!;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        fillColor: Colors.grey[200],
-                        border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.circular(screenWidth * 0.02),
-                        ),
-                      ),
-                    ),
-                  ],
+              // Pill Name
+              Text(
+                "Pill Name",
+                style: TextStyle(
+                  fontSize: screenWidth * 0.035,
+                  color: Colors.grey,
                 ),
               ),
-              SizedBox(width: screenWidth * 0.02),
+              SizedBox(height: screenHeight * 0.01),
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: "Pill name",
+                  fillColor: Colors.grey[200],
+                  filled: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(screenWidth * 0.02),
+                  ),
+                ),
+              ),
+              SizedBox(height: screenHeight * 0.02),
 
-              // Frequency
-              Flexible(
-                flex: 1,
-                child: Column(
-                  children: [
-                    Text(
-                      "Frequency",
-                      style: TextStyle(
-                          fontSize: screenWidth * 0.035, color: Colors.grey),
+              // Shape and Frequency Row
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Shape
+                  Flexible(
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Shape",
+                          style: TextStyle(
+                            fontSize: screenWidth * 0.035,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        SizedBox(height: screenHeight * 0.01),
+                        DropdownButtonFormField<String>(
+                          value: selectedShape,
+                          items: shapes
+                              .map((shape) => DropdownMenuItem<String>(
+                                    value: shape,
+                                    child: Text(shape),
+                                  ))
+                              .toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              selectedShape = value!;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            fillColor: Colors.grey[200],
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.circular(screenWidth * 0.02),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(height: screenHeight * 0.01),
-                    DropdownButtonFormField<String>(
-                      value: selectedFrequency,
-                      items: frequencies
-                          .map((freq) => DropdownMenuItem<String>(
-                                value: freq,
-                                child: Text(freq),
+                  ),
+                  SizedBox(width: screenWidth * 0.02),
+
+                  // Frequency
+                  Flexible(
+                    flex: 1,
+                    child: Column(
+                      children: [
+                        Text(
+                          "Frequency",
+                          style: TextStyle(
+                            fontSize: screenWidth * 0.035,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        SizedBox(height: screenHeight * 0.01),
+                        DropdownButtonFormField<String>(
+                          value: selectedFrequency,
+                          items: frequencies
+                              .map((freq) => DropdownMenuItem<String>(
+                                    value: freq,
+                                    child: Text(freq),
+                                  ))
+                              .toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              selectedFrequency = value!;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            fillColor: Colors.grey[200],
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.circular(screenWidth * 0.02),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: screenHeight * 0.02),
+
+              // Duration and Dosage
+              Text(
+                "Duration",
+                style: TextStyle(
+                  fontSize: screenWidth * 0.035,
+                  color: Colors.grey,
+                ),
+              ),
+              SizedBox(height: screenHeight * 0.01),
+              Row(
+                children: [
+                  Flexible(
+                    child: DropdownButtonFormField<String>(
+                      value: selectedDuration,
+                      items: durations
+                          .map((duration) => DropdownMenuItem<String>(
+                                value: duration,
+                                child: Text(duration),
                               ))
                           .toList(),
                       onChanged: (value) {
                         setState(() {
-                          selectedFrequency = value!;
+                          selectedDuration = value!;
                         });
                       },
                       decoration: InputDecoration(
@@ -157,89 +210,58 @@ class _PillState extends State<Pill> {
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: screenHeight * 0.02),
-
-          // Duration
-          Text(
-            "Duration",
-            style: TextStyle(fontSize: screenWidth * 0.035, color: Colors.grey),
-          ),
-          SizedBox(height: screenHeight * 0.01),
-          Row(
-            children: [
-              DropdownButtonFormField<String>(
-                value: selectedDuration,
-                items: durations
-                    .map((duration) => DropdownMenuItem<String>(
-                          value: duration,
-                          child: Text(duration),
-                        ))
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    selectedDuration = value!;
-                  });
-                },
-                decoration: InputDecoration(
-                  fillColor: Colors.grey[200],
-                  filled: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(screenWidth * 0.02),
                   ),
-                ),
-              ),
-              SizedBox(width: screenWidth * 0.02),
+                  SizedBox(width: screenWidth * 0.02),
 
-              // Dosage Per Time Counter
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Dosage Per Time",
-                    style: TextStyle(
-                        fontSize: screenWidth * 0.035, color: Colors.grey),
-                  ),
-                  SizedBox(height: screenHeight * 0.01),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: decrementDosage,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.lightBlue[100],
-                          shape: CircleBorder(),
+                  // Dosage Per Time Counter
+                  Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Dosage Per Time",
+                          style: TextStyle(
+                            fontSize: screenWidth * 0.035,
+                            color: Colors.grey,
+                          ),
                         ),
-                        child: Icon(Icons.remove, color: Colors.black),
-                      ),
-                      SizedBox(width: 20),
-                      Text(
-                        '$dosagePerTime',
-                        style: TextStyle(
-                          fontSize: screenWidth * 0.045,
-                          fontWeight: FontWeight.bold,
+                        SizedBox(height: screenHeight * 0.01),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ElevatedButton(
+                              onPressed: decrementDosage,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.lightBlue[100],
+                                shape: CircleBorder(),
+                              ),
+                              child: Icon(Icons.remove, color: Colors.black),
+                            ),
+                            Text(
+                              '$dosagePerTime',
+                              style: TextStyle(
+                                fontSize: screenWidth * 0.045,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: incrementDosage,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.lightBlue[100],
+                                shape: CircleBorder(),
+                              ),
+                              child: Icon(Icons.add, color: Colors.black),
+                            ),
+                          ],
                         ),
-                      ),
-                      SizedBox(width: 20),
-                      ElevatedButton(
-                        onPressed: incrementDosage,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.lightBlue[100],
-                          shape: CircleBorder(),
-                        ),
-                        child: Icon(Icons.add, color: Colors.black),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }

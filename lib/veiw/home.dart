@@ -1,3 +1,4 @@
+import 'package:doctor/veiw/BloodDonation.dart';
 import 'package:doctor/veiw/addpills.dart';
 import 'package:doctor/veiw/profile.dart';
 import 'package:flutter/material.dart';
@@ -112,7 +113,10 @@ class HomeView extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: screenWidth * 0.1,
-                      backgroundImage: AssetImage('assets/Doctor.png'),
+                      child: ClipOval(
+                        child: Image.asset("assets/Asset 11@10x.png"),
+                      ),
+                      //backgroundImage: AssetImage('assets/Asset 11@10x.png'),
                     ),
                     SizedBox(width: 10),
                     Column(
@@ -144,7 +148,6 @@ class HomeView extends StatelessWidget {
               ],
             ),
           ),
-          // Categories Section
           Padding(
             padding: EdgeInsets.all(15.0),
             child: Column(
@@ -185,7 +188,7 @@ class HomeView extends StatelessWidget {
                       SizedBox(width: 20),
                       InkWell(
                         onTap: () {
-                          print("Blood Donation tapped");
+                          Get.to(Donation());
                         },
                         child: Column(
                           children: [
