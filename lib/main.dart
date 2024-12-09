@@ -1,4 +1,3 @@
-import 'package:doctor/veiw/addpills.dart';
 import 'package:doctor/veiw/welcom.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

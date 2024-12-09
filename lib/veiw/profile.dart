@@ -1,4 +1,6 @@
+import 'package:doctor/veiw/medications.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 bool isAvailableForDonate = false;
 
@@ -271,7 +273,9 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 ),
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Get.to(Medications());
+                                  },
                                   icon: Icon(Icons.arrow_forward_ios_rounded),
                                 ),
                               ],

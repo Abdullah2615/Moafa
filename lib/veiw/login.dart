@@ -25,14 +25,14 @@ class _LoginState extends State<Login> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            // Stack(
-            //   children: [
-            //     Padding(
-            //       padding: const EdgeInsets.fromLTRB(200, 0, 0, 0),
-            //       child: Image.asset('assets/ball.png'),
-            //     ),
-            //   ],
-            // ),
+            Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(200, 0, 0, 0),
+                  child: Image.asset('assets/Asset 6@10x.png'),
+                ),
+              ],
+            ),
             Padding(
               padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
               child: Column(
@@ -103,7 +103,7 @@ class _LoginState extends State<Login> {
                     height: 5,
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(210, 0, 15, 0),
+                    padding: const EdgeInsets.fromLTRB(200, 0, 5, 0),
                     child: TextButton(
                         onPressed: () {},
                         child: Text(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class MedicationsPage extends StatefulWidget {
+class Medications extends StatefulWidget {
   @override
   _MedicationsPageState createState() => _MedicationsPageState();
 }
 
-class _MedicationsPageState extends State<MedicationsPage> {
+class _MedicationsPageState extends State<Medications> {
   // Define the state for the checkboxes
   List<bool> _medicationStatus = [false, false, false, false];
 

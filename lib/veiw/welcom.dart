@@ -24,7 +24,7 @@ class _SplashscreenState extends State<Start> {
               width: double.infinity,
               decoration: BoxDecoration(color: Colors.white),
               child: Image.asset(
-                "welcome.jpg",
+                "assets/welcome.jpg",
                 fit: BoxFit.cover,
               ),
             ),
