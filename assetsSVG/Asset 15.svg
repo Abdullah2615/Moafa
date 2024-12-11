@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.6 42.28">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #5689d6;
+        font-family: FontAwesome6Free-Solid, 'Font Awesome 6 Free';
+        font-size: 40.8px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer_1">
+    <text class="cls-1" transform="translate(0 37.18)"><tspan x="0" y="0">location-dot</tspan></text>
+  </g>
+</svg>
