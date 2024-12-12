@@ -38,6 +38,12 @@ class _SplashscreenState extends State<Start> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              minimumSize: const Size(0, 50.0),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 255, 255, 255)),
                           onPressed: () {
                             Get.to(() => Signup());
                           },
