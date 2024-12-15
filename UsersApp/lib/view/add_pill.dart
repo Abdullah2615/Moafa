@@ -144,7 +144,7 @@ class _AddPillScreenState extends State<AddPillScreen> {
                 ),
               ),
               SizedBox(height: screenHeight * 0.01),
-              pillTextField(screenWidth, "Any note")
+              pillTextField(screenWidth, "Any notes")
             ],
           ),
         ),
