@@ -1,4 +1,6 @@
+import 'package:doctor/view/add_pill.dart';
 import 'package:doctor/view/authentication/welcome.dart';
+// import 'package:doctor/view/authentication/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
