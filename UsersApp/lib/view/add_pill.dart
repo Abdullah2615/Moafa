@@ -1,20 +1,65 @@
-import 'package:doctor/controller/controller.dart';
 import 'package:doctor/model/used_styles.dart';
-import 'package:doctor/view/reusable/alarmPicker.dart';
-import 'package:doctor/view/reusable/dropDownPill.dart';
-import 'package:doctor/view/reusable/textFieldsLoginSignup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddPillScreen extends StatefulWidget {
-  const AddPillScreen({super.key});
+  AddPillScreen({super.key});
 
   @override
-  State<AddPillScreen> createState() => _AddPillScreenState();
+  State<AddPillScreen> createState() => _PillState();
 }
 
-class _AddPillScreenState extends State<AddPillScreen> {
-  final PillController controller = Get.put(PillController());
+class _PillState extends State<AddPillScreen> {
+  String selectedShape = "Tablets";
+  String selectedFrequency = "Every Day";
+  String selectedDuration = "1 Week";
+  int dosagePerTime = 1;
+  int timesPerDay = 1;
+  TimeOfDay selectedTime = TimeOfDay(hour: 13, minute: 00);
+  bool alarmEnabled = true;
+
+  List<String> shapes = ["Tablets", "Capsules", "Syrup", "Injection"];
+  List<String> frequencies = [
+    "Every Day",
+    "Every 6 Hours",
+    "Every 12 Hours",
+    "Every 8 Hours",
+    "Every Week",
+    "Every Month"
+  ];
+  List<String> durations = [
+    "1 Week",
+    "2 Weeks",
+    "1 Month",
+    "6 Months",
+    "1 Year"
+  ];
+
+  void incrementCounter(String type) {
+    setState(() {
+      if (type == "dosage") dosagePerTime++;
+      if (type == "times") timesPerDay++;
+    });
+  }
+
+  void decrementCounter(String type) {
+    setState(() {
+      if (type == "dosage" && dosagePerTime > 1) dosagePerTime--;
+      if (type == "times" && timesPerDay > 1) timesPerDay--;
+    });
+  }
+
+  Future<void> pickTime() async {
+    TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+    );
+    if (pickedTime != null) {
+      setState(() {
+        selectedTime = pickedTime;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +69,18 @@ class _AddPillScreenState extends State<AddPillScreen> {
     return Scaffold(
       backgroundColor: Mystyles.whiteColor,
       appBar: AppBar(
-        backgroundColor: Mystyles.lightBlue,
+        backgroundColor: Mystyles.maybeCyanColor,
         leading: IconButton(
           onPressed: () {
             Get.back();
           },
           icon: Icon(Icons.arrow_back_ios_new_rounded),
         ),
-        title: const Text(
+        title: Text(
           'Add Pill Schedule',
-          style: TextStyle(fontSize: 18),
+          style: Mystyles.titlesize(Mystyles.blackColor),
         ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -45,109 +91,185 @@ class _AddPillScreenState extends State<AddPillScreen> {
               // Pill Name
               Text(
                 "Pill Name",
-                style: TextStyle(
-                  fontSize: screenWidth * 0.035,
-                  color: Colors.grey,
-                ),
+                style: Mystyles.notessize(Mystyles.grey),
               ),
               SizedBox(height: screenHeight * 0.01),
-              pillTextField(screenWidth, "Pill name"),
+              TextFormField(
+                initialValue: "Panadol",
+                decoration: InputDecoration(
+                  fillColor: Mystyles.whiteColor,
+                  filled: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
               SizedBox(height: screenHeight * 0.02),
 
-              // Shape and Frequency Row
+              // Shape and Frequency
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Shape
-                  dropdownPill(
-                      label: "Shape",
-                      selectedValue: controller.selectedShape,
-                      items: controller.shapes,
-                      screenWidth: screenWidth,
-                      screenHeight: screenHeight),
-
-                  SizedBox(width: screenWidth * 0.02),
-
-                  // Frequency
-                  dropdownPill(
-                      label: "Frequency",
-                      selectedValue: controller.selectedFrequency,
-                      items: controller.frequencies,
-                      screenWidth: screenWidth,
-                      screenHeight: screenHeight),
+                  buildDropdown("Shape", selectedShape, shapes, (value) {
+                    setState(() => selectedShape = value!);
+                  }),
+                  SizedBox(
+                    width: screenWidth * 0.02,
+                  ),
+                  buildDropdown("Frequency", selectedFrequency, frequencies,
+                      (value) {
+                    setState(() => selectedFrequency = value!);
+                  }),
                 ],
               ),
               SizedBox(height: screenHeight * 0.02),
 
               // Duration and Dosage
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  dropdownPill(
-                      label: "Duration",
-                      selectedValue: controller.selectedDuration,
-                      items: controller.durations,
-                      screenWidth: screenWidth,
-                      screenHeight: screenHeight),
-                  SizedBox(width: screenWidth * 0.02),
-
-                  // Dosage Per Time Counter
-                  dosageAdjuster(
-                    label: "Dosage Per Time",
-                    dosageValue: controller.dosagePerTime,
-                    onIncrement: controller.incrementDosage,
-                    onDecrement: controller.decrementDosage,
-                    screenWidth: screenWidth,
-                    screenHeight: screenHeight,
+                  buildDropdown("Duration", selectedDuration, durations,
+                      (value) {
+                    setState(() => selectedDuration = value!);
+                  }),
+                  SizedBox(
+                    width: screenWidth * 0.03,
                   ),
+                  buildCounter("Dosage Per Time", dosagePerTime, "dosage"),
                 ],
               ),
               SizedBox(height: screenHeight * 0.02),
 
+              // Times Per Day and Next Alarm
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  dosageAdjuster(
-                    label: "Dosage Per day",
-                    dosageValue: controller.dosagePerTime2,
-                    onIncrement: controller.incrementDosage2,
-                    onDecrement: controller.decrementDosage2,
-                    screenWidth: screenWidth,
-                    screenHeight: screenHeight,
+                  buildCounter("Times Per Day", timesPerDay, "times"),
+                  SizedBox(
+                    width: screenWidth * 0.03,
                   ),
-                  SizedBox(width: screenWidth * 0.02),
-                  pickAlarm(
-                    "Next Alarm",
-                    controller.alarmTime,
-                    controller.isAlarmEnabled,
-                    () {
-                      // Open a time picker when tapped
-                      showTimePicker(
-                        context: context,
-                        initialTime: TimeOfDay.now(),
-                      ).then((selectedTime) {
-                        if (selectedTime != null) {
-                          // Update time in the controller
-                          controller.updateTime(selectedTime.format(context));
-                        }
-                      });
-                    },
-                    screenWidth,
-                    screenHeight,
-                  ),
+                  buildTimePicker(),
                 ],
               ),
               SizedBox(height: screenHeight * 0.02),
+
+              // Notes
               Text(
                 "Notes",
-                style: TextStyle(
-                  fontSize: screenWidth * 0.035,
-                  color: Colors.grey,
-                ),
               ),
               SizedBox(height: screenHeight * 0.01),
-              pillTextField(screenWidth, "Any notes")
+              TextFormField(
+                maxLines: 3,
+                decoration: InputDecoration(
+                  fillColor: Mystyles.whiteColor,
+                  filled: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget buildDropdown(String label, String value, List<String> items,
+      ValueChanged<String?> onChanged) {
+    return Flexible(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+          ),
+          SizedBox(height: 8),
+          DropdownButtonFormField<String>(
+            value: value,
+            items: items
+                .map((item) => DropdownMenuItem(value: item, child: Text(item)))
+                .toList(),
+            onChanged: onChanged,
+            decoration: InputDecoration(
+              fillColor: Mystyles.whiteColor,
+              filled: true,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildCounter(String label, int count, String type) {
+    return Flexible(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+          ),
+          SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              buildCounterButton(Icons.remove, () => decrementCounter(type)),
+              Text(
+                '$count',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              buildCounterButton(Icons.add, () => incrementCounter(type)),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildCounterButton(IconData icon, VoidCallback onPressed) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.all(8),
+          shape: CircleBorder(),
+          backgroundColor: Mystyles.maybeCyanColor),
+      child: Icon(icon, color: Colors.black),
+    );
+  }
+
+  Widget buildTimePicker() {
+    return Flexible(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Next Alarm",
+          ),
+          SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                onTap: pickTime,
+                child: Text(
+                  selectedTime.format(context),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Switch(
+                value: alarmEnabled,
+                onChanged: (value) {
+                  setState(() {
+                    alarmEnabled = value;
+                  });
+                },
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
