@@ -25,6 +25,7 @@ Widget myFormField(
               ),
               suffixIcon: IconButton(
                 icon: Icon(
+                  // ignore: dead_code
                   _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
                   color: Colors.grey,
                 ),

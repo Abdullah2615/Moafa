@@ -78,7 +78,7 @@ class _PillState extends State<AddPillScreen> {
         ),
         title: Text(
           'Add Pill Schedule',
-          style: Mystyles.titlesize(Mystyles.blackColor),
+          style: Mystyles.bold18(Mystyles.blackColor),
         ),
         centerTitle: true,
       ),

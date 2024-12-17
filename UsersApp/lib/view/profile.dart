@@ -127,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             alignment: Alignment.center,
             children: [
               Icon(Icons.water_drop, size: 70, color: Mystyles.blueColor),
-              Text("A+", style: Mystyles.titlesize(Mystyles.whiteColor)),
+              Text("A+", style: Mystyles.bold18(Mystyles.whiteColor)),
             ],
           ),
         ],
