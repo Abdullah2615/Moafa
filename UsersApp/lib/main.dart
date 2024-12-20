@@ -1,4 +1,6 @@
+import 'package:doctor/view/blooddonation.dart';
 import 'package:doctor/view/home.dart';
+import 'package:doctor/view/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomeScreen(),
+      home: BloodDonationScreen(),
     );
   }
 }

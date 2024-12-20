@@ -1,5 +1,7 @@
+import 'package:doctor/view/vitals.dart';
 import 'package:flutter/material.dart';
 import 'package:doctor/model/used_styles.dart';
+import 'package:get/get.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -32,18 +34,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Row(
                 children: [
                   Expanded(
-                    child: _infoCard(
-                      "Vitals",
-                      ["Weight", "Pulse"],
-                      ["70 KG", "70 BPM"],
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: _infoCard(
+                            "Vitals",
+                            ["Weight", "Pulse"],
+                            ["70 KG", "70 BPM"],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(width: 10),
                   Expanded(
-                    child: _infoCard(
-                      "Allergies",
-                      ["Peanut Allergy", "Perfume Allergy"],
-                      ["", ""],
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: _infoCard(
+                            "Allergies",
+                            ["Peanut Allergy", "Perfume Allergy"],
+                            ["", ""],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -96,7 +110,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           bottomRight: Radius.circular(25),
         ),
       ),
-      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -141,11 +155,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
+            Row(
+              children: [
+                Text(title, style: Mystyles.Datasize(Mystyles.blackColor)),
+                Spacer(),
+                IconButton(
+                  onPressed: () {
+                    Get.to(() => VitalScreen());
+                  },
+                  icon: Icon(Icons.arrow_forward_ios_rounded),
+                ),
+              ],
+            ),
             SizedBox(height: 10),
             ...List.generate(
               labels.length,

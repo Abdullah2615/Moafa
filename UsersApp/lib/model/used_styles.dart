@@ -8,6 +8,7 @@ class Mystyles {
   static final Color maybeCyanColor = Color(0xff5689d6);
   static final Color grey = Color(0xff687483);
   static final Color lightBlue = Colors.lightBlueAccent;
+  static final Color Lightgrey = Color(0xfff5F6F9);
 
   static TextStyle headersize(Color c) =>
       TextStyle(fontSize: 32, color: c, fontWeight: FontWeight.bold);
