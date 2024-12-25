@@ -1,12 +1,15 @@
 import 'package:doctor/model/used_styles.dart';
+import 'package:doctor/view/NearbyHospitals.dart';
 import 'package:doctor/view/add_pill.dart';
+import 'package:doctor/view/blooddonation.dart';
 import 'package:doctor/view/profile.dart';
 import 'package:doctor/view/reports.dart';
 import 'package:doctor/view/vitals.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -14,19 +17,41 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
+
   List<Widget> views = [
     VitalScreen(),
     AddPillScreen(),
     ReportsScreen(),
     ProfileScreen(),
   ];
-  // data for the categories
-  List<Map<String?, String?>> theCategoriesData = [
-    {'name': 'Hospitals', 'image': 'assets/Asset 16@10x.png'},
-    {'name': 'Blood Donation', 'image': 'assets/Asset 17@10x.png'},
-    {'name': 'Clinics', 'image': 'assets/Asset 28@10x.png'},
-    {'name': 'Radiology Centers', 'image': 'assets/Asset 27@10x.png'},
-    {'name': 'Laboratories', 'image': 'assets/Asset 30@10x.png'},
+
+  // Data for the categories
+  final List<Map<String, dynamic>> theCategoriesData = [
+    {
+      'name': 'Hospitals',
+      'image': 'assets/Asset 16@10x.png',
+      'screen': NearbyScreens(),
+    },
+    {
+      'name': 'Blood Donation',
+      'image': 'assets/Asset 17@10x.png',
+      'screen': BloodDonationScreen(),
+    },
+    {
+      'name': 'Clinics',
+      'image': 'assets/Asset 28@10x.png',
+      'screen': '/clinicsScreen'
+    },
+    {
+      'name': 'Radiology Centers',
+      'image': 'assets/Asset 27@10x.png',
+      'screen': '/radiologyScreen'
+    },
+    {
+      'name': 'Laboratories',
+      'image': 'assets/Asset 30@10x.png',
+      'screen': '/laboratoriesScreen'
+    },
   ];
 
   Widget categoryItemBuilder(String name, String image) {
@@ -74,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Row(
                   children: [
-                    // profile pic
+                    // Profile Picture
                     CircleAvatar(
                       radius: screenWidth * 0.05,
                       child: ClipOval(
@@ -82,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     SizedBox(width: screenWidth * 0.02),
-                    // Greeting + name
+                    // Greeting + Name
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -92,32 +117,30 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: Mystyles.bold16(Mystyles.blackColor)),
                       ],
                     ),
-                    const Spacer(),
-                    // the location
+                    Spacer(),
+                    // Location
                     Text(
                       'Cairo, Egypt',
                       style: Mystyles.bold14(Mystyles.maybeCyanColor),
                     ),
                     SizedBox(width: screenWidth * 0.01),
-
                     Icon(
                       Icons.location_pin,
                       color: Mystyles.maybeCyanColor,
                       size: 18,
-                    )
+                    ),
                   ],
                 ),
               ],
             ),
           ),
 
-          // The Upcoming appointment part
-
+          // Upcoming Appointment Section
           Padding(
             padding: EdgeInsets.all(16.0),
             child: Column(
               children: [
-                // the title
+                // Title
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -130,13 +153,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Text(
                           'See All',
                           style: Mystyles.bold12(Mystyles.maybeCyanColor),
-                        ))
+                        )),
                   ],
                 ),
-                SizedBox(
-                  height: screenWidth * 0.03,
-                ),
-                // the card
+                SizedBox(height: screenWidth * 0.03),
+                // Appointment Card
                 Container(
                   height: screenHeight * 0.20,
                   padding: EdgeInsets.all(16.0),
@@ -145,16 +166,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(10.0)),
                   child: Column(
                     children: [
-                      // top part
+                      // Top Part
                       Row(
                         children: [
                           CircleAvatar(
                             backgroundColor: Mystyles.maybeCyanColor,
                             radius: screenWidth * 0.04,
                           ),
-                          SizedBox(
-                            width: screenWidth * 0.02,
-                          ),
+                          SizedBox(width: screenWidth * 0.02),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -169,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               )
                             ],
                           ),
-                          const Spacer(),
+                          Spacer(),
                           CircleAvatar(
                             backgroundColor: Mystyles.maybeCyanColor,
                             radius: screenWidth * 0.03,
@@ -181,9 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: screenHeight * 0.04,
-                      ),
+                      SizedBox(height: screenHeight * 0.04),
                       Container(
                         height: screenHeight * 0.06,
                         decoration: BoxDecoration(
@@ -191,32 +208,24 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Mystyles.maybeCyanColor),
                         child: Row(
                           children: [
-                            const Spacer(),
-                            Icon(
-                              Icons.calendar_month,
-                              color: Mystyles.whiteColor,
-                            ),
-                            SizedBox(
-                              width: screenWidth * 0.01,
-                            ),
+                            Spacer(),
+                            Icon(Icons.calendar_month,
+                                color: Mystyles.whiteColor),
+                            SizedBox(width: screenWidth * 0.01),
                             Text(
                               'Monday, 31 November',
                               style: Mystyles.bold12(Mystyles.whiteColor),
                             ),
-                            const Spacer(),
+                            Spacer(),
                             Container(
                               width: 3,
                               color: Mystyles.whiteColor,
                               margin: EdgeInsets.symmetric(vertical: 8),
                             ),
-                            const Spacer(),
-                            Icon(
-                              Icons.access_time_filled,
-                              color: Mystyles.whiteColor,
-                            ),
-                            SizedBox(
-                              width: screenWidth * 0.01,
-                            ),
+                            Spacer(),
+                            Icon(Icons.access_time_filled,
+                                color: Mystyles.whiteColor),
+                            SizedBox(width: screenWidth * 0.01),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
@@ -230,20 +239,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )
                               ],
                             ),
-                            const Spacer(),
+                            Spacer(),
                           ],
                         ),
-                      )
+                      ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
 
           // Categories Section
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -252,12 +261,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: screenHeight * 0.15,
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: List.generate(
-                          theCategoriesData.length,
-                          (index) => categoryItemBuilder(
-                              theCategoriesData[index]['name']!,
-                              theCategoriesData[index]['image']!))),
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: List.generate(
+                      theCategoriesData.length,
+                      (index) => InkWell(
+                        onTap: () {
+                          Get.to(theCategoriesData[index]['screen']);
+                        },
+                        child: categoryItemBuilder(
+                          theCategoriesData[index]['name'],
+                          theCategoriesData[index]['image'],
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -316,8 +333,10 @@ class _HomeScreenState extends State<HomeScreen> {
           borderRadius: BorderRadius.circular(100),
         ),
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => AddPillScreen()));
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddPillScreen()),
+          );
         },
         backgroundColor: Mystyles.maybeCyanColor,
         child: Icon(Icons.add),
