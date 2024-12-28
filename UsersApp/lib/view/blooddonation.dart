@@ -1,4 +1,6 @@
 import 'package:doctor/model/used_styles.dart';
+import 'package:doctor/view/Bloodbanks.dart';
+import 'package:doctor/view/DonationRequest.dart';
 import 'package:doctor/view/bloodseekers.dart';
 import 'package:doctor/view/reusable/container.dart';
 import 'package:flutter/material.dart';
@@ -70,27 +72,41 @@ class _BloodDonationScreenState extends State<BloodDonationScreen> {
             ),
           ),
           SizedBox(height: 10),
+
+          // Menu Items
           _menuItem(
             Image.asset("assets/Asset 38@10x.png"),
             "Donate",
             maxHeight,
             maxWidth,
+            () {
+              Get.to(() => DonationrequestScreen());
+            },
           ),
           _menuItem(
             Image.asset("assets/Asset 39@10x.png"),
             "Blood Bank",
             maxHeight,
             maxWidth,
+            () {
+              Get.to(
+                  () => BloodBanksScreen()); // Replace with the correct screen
+            },
           ),
           _menuItem(
             Image.asset("assets/Asset 40@10x.png"),
             "Request Blood",
             maxHeight,
             maxWidth,
+            () {
+              Get.to(() => ()); // Replace with the correct screen
+            },
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.02,
           ),
+
+          // Blood Seekers Section
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -100,29 +116,33 @@ class _BloodDonationScreenState extends State<BloodDonationScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  Get.to(BloodSeekersScreen());
+                  Get.to(() => BloodSeekersScreen());
                 },
                 child: Text(
                   "See All",
                   style: Mystyles.notessize(Mystyles.blueColor),
                 ),
-              )
+              ),
             ],
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+
+          // Example of a blood seeker container
           MyContainer(
-              context: context,
-              name: "Mahmoud Mostafa",
-              location: "El",
-              bloodType: "A+",
-              onDonateTap: () {})
+            context: context,
+            name: "Mahmoud Mostafa",
+            location: "El",
+            bloodType: "A+",
+            onDonateTap: () {},
+          ),
         ],
       ),
     );
   }
 
-  Widget _menuItem(
-      Image image, String title, double maxHeight, double maxWidth) {
+  // Reusable Menu Item Widget
+  Widget _menuItem(Image image, String title, double maxHeight, double maxWidth,
+      Function()? onTap) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Card(
@@ -154,9 +174,7 @@ class _BloodDonationScreenState extends State<BloodDonationScreen> {
               color: Mystyles.blueColor,
               size: 22,
             ),
-            onTap: () {
-              // Add navigation or functionality here
-            },
+            onTap: onTap, // Executes the provided navigation function
           ),
         ),
       ),

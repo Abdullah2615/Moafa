@@ -2,7 +2,9 @@ import 'package:doctor/model/used_styles.dart';
 import 'package:flutter/material.dart';
 
 Widget myFormField(
-    String label, /*TextEditingController theController,*/ bool isPassword) {
+  String label,
+  /*TextEditingController theController,*/ bool isPassword,
+) {
   bool _isPasswordVisible = false;
 
   return isPassword
@@ -59,11 +61,7 @@ Widget myFormField(
         );
 }
 
-Widget pillTextField(
-
-  double screenWidth,
- String label
-) {
+Widget pillTextField(double screenWidth, String label) {
   return TextFormField(
     decoration: InputDecoration(
       hintText: label,
