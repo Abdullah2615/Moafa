@@ -66,60 +66,53 @@ class _BloodBanksScreenState extends State<BloodBanksScreen> {
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image.asset(
-                  asset,
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  width: MediaQuery.of(context).size.width * 0.3,
-                  fit: BoxFit.cover,
-                ),
-                const SizedBox(width: 10), // Add spacing between image and text
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset(
+                    asset,
+                    height: MediaQuery.of(context).size.height * 0.15,
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    fit: BoxFit.cover,
+                  ),
+                  Column(
                     children: [
                       Text(
                         name,
                         style: Mystyles.headersize(Mystyles.blackColor),
                       ),
-                      const SizedBox(height: 5), // Add spacing between lines
-                      Row(
-                        children: [
-                          Icon(icon, color: Mystyles.blueColor),
-                          const SizedBox(width: 5),
-                          Text(
-                            location,
-                            style: Mystyles.notessize(Mystyles.blueColor),
-                          ),
-                        ],
-                      ),
+                      const SizedBox(width: 10),
+                      Row(children: [
+                        Icon(icon, color: Mystyles.blueColor),
+                        Text(
+                          location,
+                          style: Mystyles.notessize(Mystyles.blueColor),
+                        ),
+                      ]),
                     ],
                   ),
-                ),
-              ],
-            ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Container(
-                height:
-                    MediaQuery.of(context).size.height * 0.04, // Adjust height
-                width: MediaQuery.of(context).size.width * 0.25, // Adjust width
-                decoration: BoxDecoration(
-                  color: Mystyles.blueColor,
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(5),
+                ],
+              ),
+              Flexible(
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.06,
+                    width: MediaQuery.of(context).size.width * 0.28,
+                    decoration: BoxDecoration(
+                      color: Mystyles.blueColor,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(5),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
+            ]),
       ),
     );
   }
