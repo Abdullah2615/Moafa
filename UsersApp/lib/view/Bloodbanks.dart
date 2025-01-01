@@ -58,62 +58,58 @@ class _BloodBanksScreenState extends State<BloodBanksScreen> {
     return Container(
       height: MediaQuery.of(context).size.height * 0.2,
       width: MediaQuery.of(context).size.width * 0.9,
-      margin: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
         color: Mystyles.cyanColor,
         borderRadius: BorderRadius.circular(5),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image.asset(
-                    asset,
-                    height: MediaQuery.of(context).size.height * 0.15,
-                    width: MediaQuery.of(context).size.width * 0.3,
-                    fit: BoxFit.cover,
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        name,
-                        style: Mystyles.headersize(Mystyles.blackColor),
-                      ),
-                      const SizedBox(width: 10),
-                      Row(children: [
-                        Icon(icon, color: Mystyles.blueColor),
-                        Text(
-                          location,
-                          style: Mystyles.notessize(Mystyles.blueColor),
-                        ),
-                      ]),
-                    ],
-                  ),
-                ],
+      child:
+          Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Image.asset(
+                asset,
+                height: MediaQuery.of(context).size.height * 0.15,
+                width: MediaQuery.of(context).size.width * 0.3,
+                fit: BoxFit.cover,
               ),
-              Flexible(
-                child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.06,
-                    width: MediaQuery.of(context).size.width * 0.28,
-                    decoration: BoxDecoration(
-                      color: Mystyles.blueColor,
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(5),
-                      ),
-                    ),
+            ),
+            Column(
+              children: [
+                Text(
+                  name,
+                  style: Mystyles.headersize(Mystyles.blackColor),
+                ),
+                const SizedBox(width: 10),
+                Row(children: [
+                  Icon(icon, color: Mystyles.blueColor),
+                  Text(
+                    location,
+                    style: Mystyles.notessize(Mystyles.blueColor),
                   ),
+                ]),
+              ],
+            ),
+          ],
+        ),
+        Flexible(
+          child: Align(
+            alignment: Alignment.bottomRight,
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.06,
+              width: MediaQuery.of(context).size.width * 0.28,
+              decoration: BoxDecoration(
+                color: Mystyles.blueColor,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(5),
                 ),
               ),
-            ]),
-      ),
+            ),
+          ),
+        ),
+      ]),
     );
   }
 }

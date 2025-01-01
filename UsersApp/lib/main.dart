@@ -1,4 +1,5 @@
 import 'package:doctor/view/DonationRequest.dart';
+import 'package:doctor/view/Measurement.dart';
 import 'package:doctor/view/authentication/welcome.dart';
 import 'package:doctor/view/blooddonation.dart';
 import 'package:doctor/view/home.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: WelcomeScreen(),
+      home: MeasurementScreen(),
     );
   }
 }
